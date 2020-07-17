@@ -11,7 +11,6 @@ let canvasWidth = (canvas.width = window.innerWidth);
 let canvasHeight = (canvas.height = window.innerHeight);
 let ctx = canvas.getContext("2d");
 let x, y;
-let timeMax = 3;
 //----------------------
 // Components
 //----------------------
@@ -132,12 +131,18 @@ world
 
 function create() {
   for (let i = 0; i < NUM_ELEMENTS; i++) {
-    world
+    let time = (Math.floor(Math.random() * 5) + 1) * 1000;
+
+    let entity = world
       .createEntity()
       .addComponent(Velocity, getRandomVelocity())
       .addComponent(Shape, getRandomShape())
       .addComponent(Position, getRandomPosition())
       .addComponent(Renderable);
+
+    setTimeout(() => {
+      entity.remove();
+    }, time);
   }
 }
 
